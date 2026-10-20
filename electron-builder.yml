@@ -1,0 +1,40 @@
+appId: app.deckpulse.desktop
+productName: DeckPulse
+directories:
+  output: release
+  buildResources: build
+files:
+  - out/**/*
+  - package.json
+  - '!**/*.map'
+asar: true
+# Native modules cannot be loaded from inside the asar archive.
+asarUnpack:
+  - '**/*.node'
+  - node_modules/cap/**
+  - node_modules/better-sqlite3-multiple-ciphers/**
+# Rebuilds cap and better-sqlite3 against Electron's ABI for the target platform and arch.
+npmRebuild: true
+
+mac:
+  category: public.app-category.music
+  target:
+    - { target: dmg, arch: [arm64, x64] }
+    - { target: zip, arch: [arm64, x64] }
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  # Notarization runs when APPLE_ID, APPLE_APP_SPECIFIC_PASSWORD and APPLE_TEAM_ID are set.
+  notarize: true
+  extendInfo:
+    NSMicrophoneUsageDescription: DeckPulse analyses the audio input you choose (level, bands, beats). Nothing is recorded or played back.
+
+win:
+  target:
+    - { target: nsis, arch: [x64] }
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true

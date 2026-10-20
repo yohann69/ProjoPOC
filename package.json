@@ -1,0 +1,61 @@
+{
+  "name": "deckpulse",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Live dashboard for the Pioneer/AlphaTheta XDJ-AZ",
+  "author": "DeckPulse",
+  "main": "./out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "npm run typecheck && electron-vite build",
+    "preview": "electron-vite preview",
+    "typecheck": "tsc -p tsconfig.node.json --noEmit && tsc -p tsconfig.web.json --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "rebuild": "electron-rebuild -f -w cap,better-sqlite3-multiple-ciphers",
+    "pack": "npm run build && electron-builder --dir",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:win": "npm run build && electron-builder --win",
+    "postinstall": "npm run rebuild"
+  },
+  "dependencies": {
+    "alphatheta-connect": "^0.28.5",
+    "cap": "^0.2.1",
+    "electron-log": "^5.4.4",
+    "electron-store": "^12.0.0",
+    "metadata-connect": "^1.2.2",
+    "onelibrary-connect": "^1.1.6"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.2.1",
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "electron": "^44.9.1",
+    "electron-builder": "^26.15.3",
+    "electron-vite": "^6.0.0",
+    "eslint": "^10.13.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.10",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.0",
+    "uplot": "^1.6.32",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5",
+    "zustand": "^5.0.15"
+  },
+  "allowScripts": {
+    "electron@44.9.1": true,
+    "cap@0.2.1": true,
+    "better-sqlite3-multiple-ciphers@12.11.1": true
+  }
+}
